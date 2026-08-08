@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PINTAR Haji - Kalkulator & Simulator Emas</title>
+    <!-- Google Fonts: IBM Plex Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-content">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="brand-icon"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <h1>PINTAR Haji</h1>
+        </div>
+        <p class="subtitle">Kalkulator Waktu Tunggu & Simulasi Emas</p>
+    </header>
+
+    <main class="container">
+        <!-- Panel Input -->
+        <section class="card input-panel">
+            <h2>Kondisi Finansial Keluarga</h2>
+            
+            <div class="input-group">
+                <label>Tabungan Bulanan (Rp)</label>
+                <div class="stepper">
+                    <button id="btn-tabungan-min" class="stepper-btn" aria-label="Kurangi tabungan" onclick="updateInput('tabungan', -250000)">-</button>
+                    <span id="val-tabungan" class="stepper-val">1.500.000</span>
+                    <button id="btn-tabungan-plus" class="stepper-btn" aria-label="Tambah tabungan" onclick="updateInput('tabungan', 250000)">+</button>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Jumlah Jemaah (Maks 4)</label>
+                <div class="stepper">
+                    <button id="btn-jemaah-min" class="stepper-btn" aria-label="Kurangi jemaah" onclick="updateInput('jemaah', -1)">-</button>
+                    <span id="val-jemaah" class="stepper-val">1</span>
+                    <button id="btn-jemaah-plus" class="stepper-btn" aria-label="Tambah jemaah" onclick="updateInput('jemaah', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Tahun Mulai Menabung</label>
+                <div class="stepper">
+                    <button id="btn-tahun-min" class="stepper-btn" aria-label="Kurangi tahun" onclick="updateInput('tahun', -1)">-</button>
+                    <span id="val-tahun" class="stepper-val">2026</span>
+                    <button id="btn-tahun-plus" class="stepper-btn" aria-label="Tambah tahun" onclick="updateInput('tahun', 1)">+</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hero Verdict Card -->
+        <section class="hero-verdict" id="hero-verdict">
+            <div class="verdict-icon">🌟</div>
+            <h3 class="verdict-title">Sedang Menghitung...</h3>
+            <p class="verdict-desc">Memuat data proyeksi dari server.</p>
+        </section>
+
+        <!-- Tabs Filter Skema -->
+        <section class="tabs-filter">
+            <button class="tab-btn active" data-tab="Reguler" onclick="switchTab('Reguler')">🕋 Reguler</button>
+            <button class="tab-btn" data-tab="Plus" onclick="switchTab('Plus')">✈️ Plus</button>
+            <button class="tab-btn" data-tab="Furoda" onclick="switchTab('Furoda')">👑 Furoda</button>
+        </section>
+
+        <!-- Chart Container -->
+        <section class="card chart-container">
+            <h3 id="chart-title">Grafik Proyeksi Tabungan vs Biaya</h3>
+            <div class="canvas-wrapper">
+                <canvas id="simulationChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Milestone Details -->
+        <section class="card milestone-details">
+            <h3>Detail Perkiraan Waktu Tunggu</h3>
+            <div class="milestone-grid" id="milestone-grid">
+                <!-- Injected via JS -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <p>PINTAR Haji &copy; 2026. Prediksi berbasis pemodelan Holt-Winters & Geometric Brownian Motion.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="chart-config.js"></script>
+    <script src="calculator.js"></script>
+</body>
+</html>
