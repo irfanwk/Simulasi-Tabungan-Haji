@@ -179,10 +179,13 @@ function renderVerdict(milestones) {
     
     if (bRupiah === 2120 && bEmas === 2120) {
         verdictEl.innerHTML = `
-            <span class="material-symbols-rounded text-4xl mb-2">warning</span>
-            <h3 class="text-xl font-bold mb-1">Tabungan Belum Cukup</h3>
-            <p class="text-sm opacity-90">Bunda, sepertinya dengan nominal ini waktunya sangat lama. Yuk, coba tambah tabungan bulanan.</p>
-        `;
+        <div class="gradient-primary rounded-xl p-stack-lg soft-shadow relative overflow-hidden text-center" style="background: linear-gradient(135deg, #ba1a1a, #93000a);">
+            <div class="relative z-10">
+                <span class="material-symbols-outlined text-5xl text-on-primary mb-2">warning</span>
+                <p class="font-headline-lg-mobile text-headline-lg-mobile text-on-primary mb-2">Tabungan Belum Cukup</p>
+                <p class="font-body-lg text-body-lg text-on-primary opacity-90">Bunda, sepertinya dengan nominal ini waktunya sangat lama. Yuk, coba tambah tabungan bulanan.</p>
+            </div>
+        </div>`;
         return;
     }
     
@@ -192,31 +195,34 @@ function renderVerdict(milestones) {
     
     let compareText = "";
     if (bEmas < bRupiah) {
-        compareText = `Bunda bisa berangkat ${bRupiah - bEmas} tahun lebih cepat dibanding nabung uang biasa lho!`;
+        compareText = `Bunda bisa berangkat <span class="font-bold text-secondary-fixed">${bRupiah - bEmas} tahun lebih cepat</span> dengan nabung emas.`;
     } else if (bRupiah < bEmas) {
-        compareText = `Lebih cepat ${bEmas - bRupiah} tahun dibanding nabung emas.`;
+        compareText = `Bunda bisa berangkat <span class="font-bold text-secondary-fixed">${bEmas - bRupiah} tahun lebih cepat</span> dengan nabung uang tunai.`;
     } else {
-        compareText = `Bunda bisa pilih nabung emas atau uang, waktu tunggunya sama aja.`;
+        compareText = `Waktu tunggunya sama, namun Bunda bisa menyesuaikan dengan kenyamanan finansial Bunda.`;
     }
     
     verdictEl.innerHTML = `
-        <div class="inline-flex items-center gap-1.5 bg-white/20 px-3 py-1 rounded-full text-xs font-bold mb-3">
-            <span class="material-symbols-rounded text-sm">auto_awesome</span>
-            <span>Rekomendasi Terbaik</span>
-        </div>
-        <h2 class="text-2xl font-bold mb-3">Nabung ${fastest === 'Emas' ? 'Emas' : 'Uang'} + ${activeTab}</h2>
-        <div class="flex justify-around items-center bg-white/10 rounded-2xl p-3">
-            <div>
-                <p class="text-xs opacity-90 mb-1">Berangkat Tahun</p>
-                <p class="text-3xl font-bold">${year}</p>
+        <div class="gradient-primary rounded-xl p-stack-lg soft-shadow relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 opacity-10">
+                <span class="material-symbols-outlined text-[120px]" style="font-variation-settings: 'FILL' 1;">mosque</span>
             </div>
-            <div class="w-px h-10 bg-white/30"></div>
-            <div>
-                <p class="text-xs opacity-90 mb-1">Masa Tunggu</p>
-                <p class="text-3xl font-bold">${waitTime} <span class="text-base font-normal">Thn</span></p>
+            <div class="relative z-10">
+                <p class="font-headline-lg-mobile text-headline-lg-mobile text-on-primary mb-2">Alhamdulillah!</p>
+                <p class="font-body-lg text-body-lg text-on-primary opacity-90 mb-4">${compareText}</p>
+                <div class="flex items-center gap-4 border-t border-white/20 pt-4 mt-2">
+                    <div>
+                        <p class="font-label-sm text-label-sm text-on-primary opacity-80 uppercase tracking-wide">Estimasi Berangkat</p>
+                        <p class="font-headline-md text-headline-md text-on-primary">${year}</p>
+                    </div>
+                    <div class="w-px h-8 bg-white/30"></div>
+                    <div>
+                        <p class="font-label-sm text-label-sm text-on-primary opacity-80 uppercase tracking-wide">Masa Tunggu</p>
+                        <p class="font-headline-md text-headline-md text-on-primary">${waitTime} Tahun</p>
+                    </div>
+                </div>
             </div>
         </div>
-        <p class="text-sm mt-4 bg-white/20 p-3 rounded-xl text-left shadow-sm">💡 <b>Pesan Bunda:</b> ${compareText}</p>
     `;
 }
 
@@ -229,24 +235,24 @@ function renderMilestoneGrid(milestones) {
     let lunasRupiah = milestones.Rupiah.Berangkat ? milestones.Rupiah.Berangkat.year : '> 2120';
     let lunasEmas = milestones.Emas.Berangkat ? milestones.Emas.Berangkat.year : '> 2120';
     
-    let tungguRupiah = milestones.Rupiah.Berangkat ? (milestones.Rupiah.Berangkat.year - inputs.tahun) + ' thn' : '-';
-    let tungguEmas = milestones.Emas.Berangkat ? (milestones.Emas.Berangkat.year - inputs.tahun) + ' thn' : '-';
+    let tungguRupiah = milestones.Rupiah.Berangkat ? (milestones.Rupiah.Berangkat.year - inputs.tahun) + ' Thn' : '-';
+    let tungguEmas = milestones.Emas.Berangkat ? (milestones.Emas.Berangkat.year - inputs.tahun) + ' Thn' : '-';
     
     tbody.innerHTML = `
-        <tr>
-            <td class="py-4 px-2 font-medium text-slate-700">Tahun Lunas DP</td>
-            <td class="py-4 px-2 text-center text-slate-600 font-bold bg-white">${dpRupiah}</td>
-            <td class="py-4 px-2 text-center text-gold font-bold bg-gold-light/30">${dpEmas}</td>
+        <tr class="border-b border-surface-container">
+            <td class="p-4 font-body-sm text-body-md text-on-surface-variant">Tahun Lunas DP</td>
+            <td class="p-4 font-body-md text-body-md text-on-surface text-center bg-surface-bright">${dpRupiah}</td>
+            <td class="p-4 font-body-md text-body-md text-on-surface text-center bg-[#fdfaf2] font-semibold text-secondary">${dpEmas}</td>
+        </tr>
+        <tr class="border-b border-surface-container">
+            <td class="p-4 font-body-sm text-body-md text-on-surface-variant">Estimasi Berangkat</td>
+            <td class="p-4 font-body-md text-body-md text-on-surface text-center bg-surface-bright">${lunasRupiah}</td>
+            <td class="p-4 font-body-md text-body-md text-on-surface text-center bg-[#fdfaf2] font-semibold text-secondary">${lunasEmas}</td>
         </tr>
         <tr>
-            <td class="py-4 px-2 font-medium text-slate-700">Estimasi Berangkat</td>
-            <td class="py-4 px-2 text-center text-slate-600 font-bold bg-white">${lunasRupiah}</td>
-            <td class="py-4 px-2 text-center text-gold font-bold bg-gold-light/30">${lunasEmas}</td>
-        </tr>
-        <tr>
-            <td class="py-4 px-2 font-medium text-slate-700">Waktu Tunggu</td>
-            <td class="py-4 px-2 text-center text-slate-600 font-bold bg-white">${tungguRupiah}</td>
-            <td class="py-4 px-2 text-center text-gold font-bold bg-gold-light/30">${tungguEmas}</td>
+            <td class="p-4 font-body-sm text-body-md text-on-surface-variant">Waktu Tunggu</td>
+            <td class="p-4 font-body-md text-body-md text-on-surface text-center bg-surface-bright">${tungguRupiah}</td>
+            <td class="p-4 font-body-md text-body-md text-on-surface text-center bg-[#fdfaf2] font-semibold text-secondary">${tungguEmas}</td>
         </tr>
     `;
 }
