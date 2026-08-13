@@ -179,9 +179,14 @@ function renderVerdict(milestones) {
     
     if (bRupiah === 2120 && bEmas === 2120) {
         verdictEl.innerHTML = `
-            <div class="verdict-icon">⚠️</div>
-            <h3 class="verdict-title">Tabungan Belum Mencukupi</h3>
-            <p class="verdict-desc">Dengan tabungan ini, simulasi hingga 2120 belum dapat menutupi biaya pelunasan. Coba tingkatkan nilai tabungan bulanan.</p>
+            <div class="relative z-10 space-y-6">
+                <div class="inline-flex items-center gap-2 bg-red-500/50 px-4 py-1.5 rounded-full backdrop-blur-sm">
+                    <span class="material-symbols-outlined text-sm">warning</span>
+                    <span class="text-xs font-bold uppercase tracking-wider">Perhatian</span>
+                </div>
+                <h2 class="text-3xl font-bold">Tabungan Belum Mencukupi</h2>
+                <p class="text-lg opacity-90">Dengan tabungan ini, simulasi hingga 2120 belum dapat menutupi biaya pelunasan. Coba tingkatkan nilai tabungan bulanan.</p>
+            </div>
         `;
         return;
     }
@@ -200,10 +205,27 @@ function renderVerdict(milestones) {
     }
     
     verdictEl.innerHTML = `
-        <span class="highlight-badge">Rekomendasi Tercepat</span>
-        <h3 class="verdict-title">Tabungan ${fastest} + Skema ${activeTab}</h3>
-        <p class="verdict-desc">Estimasi Berangkat: <strong>Tahun ${year}</strong> (Tunggu ${waitTime} Tahun).</p>
-        <p class="verdict-desc" style="margin-top: 8px; font-size: 12px;">💡 ${compareText}</p>
+        <div class="absolute -right-10 -top-10 opacity-10">
+            <span class="material-symbols-outlined text-9xl">mosque</span>
+        </div>
+        <div class="relative z-10 space-y-6">
+            <div class="inline-flex items-center gap-2 bg-white/20 px-4 py-1.5 rounded-full backdrop-blur-sm">
+                <span class="material-symbols-outlined text-sm">stars</span>
+                <span class="text-xs font-bold uppercase tracking-wider">Rekomendasi Tercepat</span>
+            </div>
+            <h2 class="text-3xl font-bold">Tabungan ${fastest} + Skema ${activeTab}</h2>
+            <div class="grid grid-cols-2 gap-8 pt-4 border-t border-white/20">
+                <div>
+                    <p class="text-xs font-bold uppercase tracking-wider text-white/70 mb-1">Estimasi Berangkat</p>
+                    <p class="text-4xl font-light">Tahun ${year}</p>
+                </div>
+                <div>
+                    <p class="text-xs font-bold uppercase tracking-wider text-white/70 mb-1">Masa Tunggu</p>
+                    <p class="text-4xl font-light">${waitTime} Tahun</p>
+                </div>
+            </div>
+            <p class="text-sm opacity-90 mt-2">💡 ${compareText}</p>
+        </div>
     `;
 }
 
@@ -218,19 +240,32 @@ function renderMilestoneGrid(milestones) {
     
     formats.forEach(f => {
         let m = milestones[f.key];
-        let dpText = activeTab === 'Furoda' ? 'Langsung Lunas (Tanpa DP)' : (m.DP ? `Tahun ${m.DP.year}` : 'Tidak Tercapai');
+        let dpText = activeTab === 'Furoda' ? 'Langsung Lunas' : (m.DP ? `Tahun ${m.DP.year}` : 'Tidak Tercapai');
         let lunasText = m.Berangkat ? `Tahun ${m.Berangkat.year}` : '> 2120';
         
+        let cardClass = f.key === 'Emas' ? 'premium-gold-glass rounded-xl' : 'glass-panel rounded-xl border-t-4 border-[#333e51] hover:shadow-lg transition-shadow';
+        let iconBg = f.key === 'Emas' ? 'bg-[#fed65b] text-[#735c00]' : 'bg-[#e6e8ea] text-[#333e51]';
+        let iconName = f.key === 'Emas' ? 'diamond' : 'payments';
+        let titleColor = f.key === 'Emas' ? 'text-[#241a00]' : 'text-[#333e51]';
+        let valColor = f.key === 'Emas' ? 'text-[#241a00]' : 'text-[#333e51]';
+        
         html += `
-            <div class="milestone-card ${f.class}">
-                <h4>${f.title}</h4>
-                <div style="margin-top: 16px;">
-                    <p class="desc">Lunas DP / Dana Awal:</p>
-                    <div class="year">${dpText}</div>
+            <div class="${cardClass} p-6">
+                <div class="flex items-center gap-3 mb-6 relative z-10">
+                    <div class="w-10 h-10 rounded-full ${iconBg} flex items-center justify-center">
+                        <span class="material-symbols-outlined">${iconName}</span>
+                    </div>
+                    <h3 class="text-xl font-medium ${titleColor}">${f.title}</h3>
                 </div>
-                <div style="margin-top: 16px;">
-                    <p class="desc">Estimasi Keberangkatan:</p>
-                    <div class="year">${lunasText}</div>
+                <div class="space-y-4 relative z-10">
+                    <div class="flex justify-between items-center border-b ${f.key === 'Emas' ? 'border-[#d4af37]/20' : 'border-[#e0e3e5]'} pb-2">
+                        <span class="text-base text-[#414750]">Target DP Tercapai</span>
+                        <span class="text-lg font-semibold ${valColor}">${dpText}</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-base text-[#414750]">Estimasi Berangkat</span>
+                        <span class="text-lg font-semibold ${valColor}">${lunasText}</span>
+                    </div>
                 </div>
             </div>
         `;

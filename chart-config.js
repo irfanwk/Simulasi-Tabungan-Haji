@@ -1,9 +1,9 @@
 let simulationChartInstance = null;
 
 const colors = {
-    rupiah: '#0369A1',     // Primary
-    emas: '#F59E0B',       // Gold/Amber
-    biaya: '#EF4444'       // Red (Target)
+    rupiah: '#005792',     // Primary
+    emas: '#d4af37',       // Gold/Amber
+    biaya: '#ba1a1a'       // Red (Target)
 };
 
 function initChart() {
