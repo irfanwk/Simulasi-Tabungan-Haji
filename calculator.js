@@ -183,7 +183,7 @@ function renderVerdict(milestones) {
             <div class="relative z-10">
                 <span class="material-symbols-outlined text-5xl text-on-primary mb-2">warning</span>
                 <p class="font-headline-lg-mobile text-headline-lg-mobile text-on-primary mb-2">Tabungan Belum Cukup</p>
-                <p class="font-body-lg text-body-lg text-on-primary opacity-90">Bunda, sepertinya dengan nominal ini waktunya sangat lama. Yuk, coba tambah tabungan bulanan.</p>
+                <p class="font-body-lg text-body-lg text-on-primary opacity-90">Sepertinya dengan nominal ini waktunya sangat lama. Silakan coba tingkatkan nilai tabungan bulanan Anda.</p>
             </div>
         </div>`;
         return;
@@ -195,11 +195,11 @@ function renderVerdict(milestones) {
     
     let compareText = "";
     if (bEmas < bRupiah) {
-        compareText = `Bunda bisa berangkat <span class="font-bold text-secondary-fixed">${bRupiah - bEmas} tahun lebih cepat</span> dengan nabung emas.`;
+        compareText = `Anda bisa berangkat <span class="font-bold text-secondary-fixed">${bRupiah - bEmas} tahun lebih cepat</span> dengan nabung emas.`;
     } else if (bRupiah < bEmas) {
-        compareText = `Bunda bisa berangkat <span class="font-bold text-secondary-fixed">${bEmas - bRupiah} tahun lebih cepat</span> dengan nabung uang tunai.`;
+        compareText = `Anda bisa berangkat <span class="font-bold text-secondary-fixed">${bEmas - bRupiah} tahun lebih cepat</span> dengan nabung uang tunai.`;
     } else {
-        compareText = `Waktu tunggunya sama, namun Bunda bisa menyesuaikan dengan kenyamanan finansial Bunda.`;
+        compareText = `Waktu tunggunya sama, namun Anda dapat menyesuaikan dengan kenyamanan finansial Anda.`;
     }
     
     verdictEl.innerHTML = `
