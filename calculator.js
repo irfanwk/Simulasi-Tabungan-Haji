@@ -5,6 +5,7 @@ let inputs = {
     tahun: 2026
 };
 let activeTab = 'Reguler';
+let chartMode = 'Rupiah';
 let simulationData = [];
 
 // Formatter
@@ -74,6 +75,26 @@ function switchTab(tab) {
     }
 }
 
+function setChartMode(mode) {
+    chartMode = mode;
+    
+    // Update button styles
+    const btnRupiah = document.getElementById('toggle-rupiah');
+    const btnEmas = document.getElementById('toggle-emas');
+    
+    if (mode === 'Rupiah') {
+        btnRupiah.className = "px-3 py-1 font-label-sm rounded-full bg-primary text-on-primary shadow-sm transition-colors";
+        btnEmas.className = "px-3 py-1 font-label-sm rounded-full text-on-surface-variant hover:bg-surface-container transition-colors";
+    } else {
+        btnEmas.className = "px-3 py-1 font-label-sm rounded-full bg-secondary text-on-primary shadow-sm transition-colors";
+        btnRupiah.className = "px-3 py-1 font-label-sm rounded-full text-on-surface-variant hover:bg-surface-container transition-colors";
+    }
+    
+    if (simulationData.length > 0) {
+        runSimulation();
+    }
+}
+
 // Load Data
 async function loadData() {
     try {
@@ -106,8 +127,8 @@ function runSimulation() {
     
     // Milestones tracking
     let milestones = {
-        Rupiah: { DP: null, Berangkat: null },
-        Emas: { DP: null, Berangkat: null }
+        Rupiah: { DP: null, Pelunasan: null, Berangkat: null },
+        Emas: { DP: null, Pelunasan: null, Berangkat: null }
     };
     
     let chartLabels = [];
@@ -156,12 +177,18 @@ function runSimulation() {
         
         // Logic for Rupiah
         if (activeTab === 'Furoda') {
+            if (!milestones.Rupiah.Pelunasan && saldoRupiah >= lunasTarget) {
+                milestones.Rupiah.Pelunasan = { date: t, year: year, type: 'Rupiah' };
+            }
             if (!milestones.Rupiah.Berangkat && saldoRupiah >= lunasTarget) {
                 milestones.Rupiah.Berangkat = { date: t, year: year, type: 'Rupiah' };
             }
         } else {
             if (!milestones.Rupiah.DP && saldoRupiah >= dpTarget) {
                 milestones.Rupiah.DP = { date: t, year: year, type: 'Rupiah' };
+            }
+            if (!milestones.Rupiah.Pelunasan && saldoRupiah >= lunasTarget) {
+                milestones.Rupiah.Pelunasan = { date: t, year: year, type: 'Rupiah' };
             }
             if (milestones.Rupiah.DP && !milestones.Rupiah.Berangkat) {
                 if (year >= milestones.Rupiah.DP.year + waitingTime && saldoRupiah >= lunasTarget) {
@@ -172,12 +199,18 @@ function runSimulation() {
         
         // Logic for Emas
         if (activeTab === 'Furoda') {
+            if (!milestones.Emas.Pelunasan && valuasiEmas >= lunasTarget) {
+                milestones.Emas.Pelunasan = { date: t, year: year, type: 'Emas' };
+            }
             if (!milestones.Emas.Berangkat && valuasiEmas >= lunasTarget) {
                 milestones.Emas.Berangkat = { date: t, year: year, type: 'Emas' };
             }
         } else {
             if (!milestones.Emas.DP && valuasiEmas >= dpTarget) {
                 milestones.Emas.DP = { date: t, year: year, type: 'Emas' };
+            }
+            if (!milestones.Emas.Pelunasan && valuasiEmas >= lunasTarget) {
+                milestones.Emas.Pelunasan = { date: t, year: year, type: 'Emas' };
             }
             if (milestones.Emas.DP && !milestones.Emas.Berangkat) {
                 if (year >= milestones.Emas.DP.year + waitingTime && valuasiEmas >= lunasTarget) {
@@ -212,12 +245,16 @@ function runSimulation() {
 
     // Update Chart
     document.getElementById('chart-title').innerText = `Proyeksi Tabungan vs Biaya Haji ${activeTab} (${N} Orang)`;
-    updateChart(
-        chartLabels.slice(0, sliceIndex), 
-        chartRupiah.slice(0, sliceIndex), 
-        chartEmas.slice(0, sliceIndex), 
-        chartBiaya.slice(0, sliceIndex)
-    );
+    if (typeof updateChart === 'function') {
+        updateChart(
+            chartMode,
+            chartLabels.slice(0, sliceIndex), 
+            chartRupiah.slice(0, sliceIndex), 
+            chartEmas.slice(0, sliceIndex), 
+            chartBiaya.slice(0, sliceIndex),
+            milestones
+        );
+    }
     
     // Render UI
     renderVerdict(milestones);
@@ -284,6 +321,9 @@ function renderMilestoneGrid(milestones) {
     let dpRupiah = activeTab === 'Furoda' ? 'Lunas' : (milestones.Rupiah.DP ? milestones.Rupiah.DP.year : '-');
     let dpEmas = activeTab === 'Furoda' ? 'Lunas' : (milestones.Emas.DP ? milestones.Emas.DP.year : '-');
     
+    let pelunasanRupiah = milestones.Rupiah.Pelunasan ? milestones.Rupiah.Pelunasan.year : '> 2120';
+    let pelunasanEmas = milestones.Emas.Pelunasan ? milestones.Emas.Pelunasan.year : '> 2120';
+    
     let lunasRupiah = milestones.Rupiah.Berangkat ? milestones.Rupiah.Berangkat.year : '> 2120';
     let lunasEmas = milestones.Emas.Berangkat ? milestones.Emas.Berangkat.year : '> 2120';
     
@@ -295,6 +335,11 @@ function renderMilestoneGrid(milestones) {
             <td class="p-4 font-body-sm text-body-md text-on-surface-variant">Tahun Lunas DP</td>
             <td class="p-4 font-body-md text-body-md text-on-surface text-center bg-surface-bright">${dpRupiah}</td>
             <td class="p-4 font-body-md text-body-md text-on-surface text-center bg-[#fdfaf2] font-semibold text-secondary">${dpEmas}</td>
+        </tr>
+        <tr class="border-b border-surface-container">
+            <td class="p-4 font-body-sm text-body-md text-on-surface-variant">Tahun Lunas Total</td>
+            <td class="p-4 font-body-md text-body-md text-on-surface text-center bg-surface-bright">${pelunasanRupiah}</td>
+            <td class="p-4 font-body-md text-body-md text-on-surface text-center bg-[#fdfaf2] font-semibold text-secondary">${pelunasanEmas}</td>
         </tr>
         <tr class="border-b border-surface-container">
             <td class="p-4 font-body-sm text-body-md text-on-surface-variant">Estimasi Berangkat</td>

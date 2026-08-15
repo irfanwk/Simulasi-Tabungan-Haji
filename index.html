@@ -214,7 +214,13 @@
 
     <!-- Chart Area -->
     <section>
-        <h2 id="chart-title" class="font-headline-md text-headline-md text-on-surface mb-stack-md">Grafik Proyeksi</h2>
+        <div class="flex items-center justify-between mb-stack-md">
+            <h2 id="chart-title" class="font-headline-md text-headline-md text-on-surface">Grafik Proyeksi</h2>
+            <div class="flex bg-surface-container-low rounded-full p-1 border border-outline-variant">
+                <button id="toggle-rupiah" onclick="setChartMode('Rupiah')" class="px-3 py-1 font-label-sm rounded-full bg-primary text-on-primary shadow-sm transition-colors">Uang Rupiah</button>
+                <button id="toggle-emas" onclick="setChartMode('Emas')" class="px-3 py-1 font-label-sm rounded-full text-on-surface-variant hover:bg-surface-container transition-colors">Emas</button>
+            </div>
+        </div>
         <div class="bg-surface-container-lowest rounded-xl p-stack-md soft-shadow h-[300px] relative overflow-hidden">
             <canvas id="simulationChart" class="w-full h-full"></canvas>
         </div>
