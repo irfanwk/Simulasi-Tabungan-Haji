@@ -129,14 +129,14 @@
         <div class="bg-surface-container-lowest rounded-lg p-stack-md soft-shadow">
             <label class="block font-body-md text-body-md text-on-surface-variant mb-stack-sm">Berapa yang ditabung per bulan?</label>
             <div class="flex items-center justify-between bg-surface-container rounded-full p-2 h-[56px]">
-                <button id="btn-tabungan-min" onclick="updateInput('tabungan', -250000)" class="stepper-btn w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full bg-surface-container-lowest text-primary shadow-sm transition-opacity duration-200">
+                <button id="btn-tabungan-min" onclick="updateInput('tabungan', -1)" class="stepper-btn w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full bg-surface-container-lowest text-primary shadow-sm transition-opacity duration-200">
                     <span class="material-symbols-outlined">remove</span>
                 </button>
                 <div class="flex items-center">
                     <span class="text-sm mr-1 font-bold">Rp</span>
-                    <input type="text" inputmode="numeric" id="val-tabungan" class="font-headline-md text-headline-md text-on-surface bg-transparent border-none outline-none focus:ring-0 p-0 m-0 w-[120px] text-center" onchange="handleDirectInput('tabungan', this.value)" value="1.500.000">
+                    <input type="text" inputmode="numeric" id="val-tabungan" class="font-headline-md text-headline-md text-on-surface bg-transparent border-none outline-none focus:ring-0 p-0 m-0 w-[120px] text-center" onfocus="this.value = this.value.replace(/\D/g, '')" onblur="handleDirectInput('tabungan', this.value)" value="1.500.000">
                 </div>
-                <button id="btn-tabungan-plus" onclick="updateInput('tabungan', 250000)" class="stepper-btn w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full bg-primary text-on-primary shadow-sm transition-opacity duration-200">
+                <button id="btn-tabungan-plus" onclick="updateInput('tabungan', 1)" class="stepper-btn w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full bg-primary text-on-primary shadow-sm transition-opacity duration-200">
                     <span class="material-symbols-outlined">add</span>
                 </button>
             </div>
@@ -235,7 +235,7 @@
 
 </main>
 
-<script src="chart-config.js?v=3"></script>
-<script src="calculator.js?v=3"></script>
+<script src="chart-config.js?v=4"></script>
+<script src="calculator.js?v=4"></script>
 </body>
 </html>

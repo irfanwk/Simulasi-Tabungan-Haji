@@ -16,7 +16,12 @@ const formatIDR = (num) => {
 // Input Handlers
 function updateInput(key, diff) {
     if (key === 'tabungan') {
-        inputs.tabungan += diff;
+        const step = 100000;
+        if (diff > 0) {
+            inputs.tabungan = Math.ceil((inputs.tabungan + 1) / step) * step;
+        } else {
+            inputs.tabungan = Math.floor((inputs.tabungan - 1) / step) * step;
+        }
         if (inputs.tabungan < 1000) inputs.tabungan = 1000;
         document.getElementById('val-tabungan').value = formatIDR(inputs.tabungan).replace('Rp', '').trim();
     } else if (key === 'jemaah') {
