@@ -22,7 +22,7 @@ function updateInput(key, diff) {
         } else {
             inputs.tabungan = Math.floor((inputs.tabungan - 1) / step) * step;
         }
-        if (inputs.tabungan < 1000) inputs.tabungan = 1000;
+        if (inputs.tabungan < 100000) inputs.tabungan = 100000;
         document.getElementById('val-tabungan').value = formatIDR(inputs.tabungan).replace('Rp', '').trim();
     } else if (key === 'jemaah') {
         inputs.jemaah += diff;
@@ -45,7 +45,7 @@ function updateInput(key, diff) {
 function handleDirectInput(key, value) {
     if (key === 'tabungan') {
         let numericVal = parseInt(value.replace(/\D/g, ''));
-        if (isNaN(numericVal) || numericVal < 1000) numericVal = 1000;
+        if (isNaN(numericVal) || numericVal < 100000) numericVal = 100000;
         inputs.tabungan = numericVal;
         document.getElementById('val-tabungan').value = formatIDR(inputs.tabungan).replace('Rp', '').trim();
     } else if (key === 'jemaah') {
@@ -85,7 +85,7 @@ function updateButtonStates() {
     toggleButton('btn-jemaah-min', inputs.jemaah <= 1);
     toggleButton('btn-jemaah-plus', inputs.jemaah >= 4);
     
-    toggleButton('btn-tabungan-min', inputs.tabungan <= 1000);
+    toggleButton('btn-tabungan-min', inputs.tabungan <= 100000);
     
     toggleButton('btn-tahun-min', inputs.tahun <= 2026);
     toggleButton('btn-tahun-plus', inputs.tahun >= 2060);
