@@ -208,7 +208,7 @@ function renderVerdict(milestones) {
                 <span class="material-symbols-outlined text-[120px]" style="font-variation-settings: 'FILL' 1;">mosque</span>
             </div>
             <div class="relative z-10">
-                <p class="font-headline-lg-mobile text-headline-lg-mobile text-on-primary mb-2">Alhamdulillah!</p>
+                <p class="font-headline-lg-mobile text-headline-lg-mobile text-on-primary mb-2">Hasil Simulasi:</p>
                 <p class="font-body-lg text-body-lg text-on-primary opacity-90 mb-4">${compareText}</p>
                 <div class="flex items-center gap-4 border-t border-white/20 pt-4 mt-2">
                     <div>
