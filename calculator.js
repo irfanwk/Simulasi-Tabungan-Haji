@@ -163,9 +163,37 @@ function runSimulation() {
         }
     }
     
+    // Determine reasonable max year for chart to prevent exponential explosion
+    const bRupiah = milestones.Rupiah.Berangkat ? milestones.Rupiah.Berangkat.year : 2120;
+    const bEmas = milestones.Emas.Berangkat ? milestones.Emas.Berangkat.year : 2120;
+    
+    let maxYearToChart = 2120;
+    if (bRupiah !== 2120 || bEmas !== 2120) {
+        maxYearToChart = Math.max(
+            bRupiah !== 2120 ? bRupiah : 0, 
+            bEmas !== 2120 ? bEmas : 0
+        ) + 2;
+    } else {
+        // if neither can depart, just show 25 years
+        maxYearToChart = inputs.tahun + 25;
+    }
+    
+    // Limit visually to max 35 years so it doesn't look totally skewed
+    if (maxYearToChart > inputs.tahun + 35) {
+        maxYearToChart = inputs.tahun + 35;
+    }
+    
+    let sliceIndex = chartLabels.findIndex(l => parseInt(l.split('-')[0]) > maxYearToChart);
+    if (sliceIndex === -1) sliceIndex = chartLabels.length;
+
     // Update Chart
     document.getElementById('chart-title').innerText = `Proyeksi Tabungan vs Biaya Haji ${activeTab} (${N} Orang)`;
-    updateChart(chartLabels, chartRupiah, chartEmas, chartBiaya);
+    updateChart(
+        chartLabels.slice(0, sliceIndex), 
+        chartRupiah.slice(0, sliceIndex), 
+        chartEmas.slice(0, sliceIndex), 
+        chartBiaya.slice(0, sliceIndex)
+    );
     
     // Render UI
     renderVerdict(milestones);
