@@ -30,9 +30,32 @@ function updateInput(key, diff) {
         document.getElementById('val-tahun').innerText = inputs.tahun;
     }
     
+    updateButtonStates();
     if (simulationData.length > 0) {
         runSimulation();
     }
+}
+
+function updateButtonStates() {
+    const toggleButton = (id, isDisabled) => {
+        const btn = document.getElementById(id);
+        if (!btn) return;
+        if (isDisabled) {
+            btn.classList.add('opacity-40', 'pointer-events-none');
+            btn.disabled = true;
+        } else {
+            btn.classList.remove('opacity-40', 'pointer-events-none');
+            btn.disabled = false;
+        }
+    };
+
+    toggleButton('btn-jemaah-min', inputs.jemaah <= 1);
+    toggleButton('btn-jemaah-plus', inputs.jemaah >= 4);
+    
+    toggleButton('btn-tabungan-min', inputs.tabungan <= 500000);
+    
+    toggleButton('btn-tahun-min', inputs.tahun <= 2026);
+    toggleButton('btn-tahun-plus', inputs.tahun >= 2060);
 }
 
 function switchTab(tab) {
@@ -62,6 +85,7 @@ async function loadData() {
         document.getElementById('val-jemaah').innerText = inputs.jemaah;
         document.getElementById('val-tahun').innerText = inputs.tahun;
         
+        updateButtonStates();
         runSimulation();
     } catch (error) {
         console.error("Error loading data:", error);

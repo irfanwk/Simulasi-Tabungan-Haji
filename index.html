@@ -129,14 +129,14 @@
         <div class="bg-surface-container-lowest rounded-lg p-stack-md soft-shadow">
             <label class="block font-body-md text-body-md text-on-surface-variant mb-stack-sm">Berapa yang ditabung per bulan?</label>
             <div class="flex items-center justify-between bg-surface-container rounded-full p-2 h-[56px]">
-                <button onclick="updateInput('tabungan', -250000)" class="stepper-btn w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full bg-surface-container-lowest text-primary shadow-sm">
+                <button id="btn-tabungan-min" onclick="updateInput('tabungan', -250000)" class="stepper-btn w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full bg-surface-container-lowest text-primary shadow-sm transition-opacity duration-200">
                     <span class="material-symbols-outlined">remove</span>
                 </button>
                 <div class="flex items-center">
                     <span class="text-sm mr-1 font-bold">Rp</span>
                     <span id="val-tabungan" class="font-headline-md text-headline-md text-on-surface">1.500.000</span>
                 </div>
-                <button onclick="updateInput('tabungan', 250000)" class="stepper-btn w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full bg-primary text-on-primary shadow-sm">
+                <button id="btn-tabungan-plus" onclick="updateInput('tabungan', 250000)" class="stepper-btn w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full bg-primary text-on-primary shadow-sm transition-opacity duration-200">
                     <span class="material-symbols-outlined">add</span>
                 </button>
             </div>
@@ -145,14 +145,14 @@
         <div class="bg-surface-container-lowest rounded-lg p-stack-md soft-shadow">
             <label class="block font-body-md text-body-md text-on-surface-variant mb-stack-sm">Untuk berapa orang?</label>
             <div class="flex items-center justify-between bg-surface-container rounded-full p-2 h-[56px]">
-                <button onclick="updateInput('jemaah', -1)" class="stepper-btn w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full bg-surface-container-lowest text-primary shadow-sm">
+                <button id="btn-jemaah-min" onclick="updateInput('jemaah', -1)" class="stepper-btn w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full bg-surface-container-lowest text-primary shadow-sm transition-opacity duration-200">
                     <span class="material-symbols-outlined">remove</span>
                 </button>
                 <div class="flex items-center gap-1">
                     <span id="val-jemaah" class="font-headline-md text-headline-md text-on-surface">1</span>
                     <span class="font-body-md text-on-surface">Orang</span>
                 </div>
-                <button onclick="updateInput('jemaah', 1)" class="stepper-btn w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full bg-primary text-on-primary shadow-sm">
+                <button id="btn-jemaah-plus" onclick="updateInput('jemaah', 1)" class="stepper-btn w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full bg-primary text-on-primary shadow-sm transition-opacity duration-200">
                     <span class="material-symbols-outlined">add</span>
                 </button>
             </div>
@@ -161,11 +161,11 @@
         <div class="bg-surface-container-lowest rounded-lg p-stack-md soft-shadow">
             <label class="block font-body-md text-body-md text-on-surface-variant mb-stack-sm">Mulai menabung tahun berapa?</label>
             <div class="flex items-center justify-between bg-surface-container rounded-full p-2 h-[56px]">
-                <button onclick="updateInput('tahun', -1)" class="stepper-btn w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full bg-surface-container-lowest text-primary shadow-sm">
+                <button id="btn-tahun-min" onclick="updateInput('tahun', -1)" class="stepper-btn w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full bg-surface-container-lowest text-primary shadow-sm transition-opacity duration-200">
                     <span class="material-symbols-outlined">remove</span>
                 </button>
                 <span id="val-tahun" class="font-headline-md text-headline-md text-on-surface">2026</span>
-                <button onclick="updateInput('tahun', 1)" class="stepper-btn w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full bg-primary text-on-primary shadow-sm">
+                <button id="btn-tahun-plus" onclick="updateInput('tahun', 1)" class="stepper-btn w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full bg-primary text-on-primary shadow-sm transition-opacity duration-200">
                     <span class="material-symbols-outlined">add</span>
                 </button>
             </div>
