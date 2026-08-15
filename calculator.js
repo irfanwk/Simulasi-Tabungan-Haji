@@ -18,17 +18,17 @@ function updateInput(key, diff) {
     if (key === 'tabungan') {
         inputs.tabungan += diff;
         if (inputs.tabungan < 500000) inputs.tabungan = 500000;
-        document.getElementById('val-tabungan').innerText = formatIDR(inputs.tabungan).replace('Rp', '').trim();
+        document.getElementById('val-tabungan').value = formatIDR(inputs.tabungan).replace('Rp', '').trim();
     } else if (key === 'jemaah') {
         inputs.jemaah += diff;
         if (inputs.jemaah < 1) inputs.jemaah = 1;
         if (inputs.jemaah > 4) inputs.jemaah = 4;
-        document.getElementById('val-jemaah').innerText = inputs.jemaah;
+        document.getElementById('val-jemaah').value = inputs.jemaah;
     } else if (key === 'tahun') {
         inputs.tahun += diff;
         if (inputs.tahun < 2026) inputs.tahun = 2026;
         if (inputs.tahun > 2060) inputs.tahun = 2060;
-        document.getElementById('val-tahun').innerText = inputs.tahun;
+        document.getElementById('val-tahun').value = inputs.tahun;
     }
     
     updateButtonStates();
@@ -36,6 +36,33 @@ function updateInput(key, diff) {
         runSimulation();
     }
 }
+
+function handleDirectInput(key, value) {
+    if (key === 'tabungan') {
+        let numericVal = parseInt(value.replace(/\D/g, ''));
+        if (isNaN(numericVal) || numericVal < 500000) numericVal = 500000;
+        inputs.tabungan = numericVal;
+        document.getElementById('val-tabungan').value = formatIDR(inputs.tabungan).replace('Rp', '').trim();
+    } else if (key === 'jemaah') {
+        let numericVal = parseInt(value);
+        if (isNaN(numericVal) || numericVal < 1) numericVal = 1;
+        if (numericVal > 4) numericVal = 4;
+        inputs.jemaah = numericVal;
+        document.getElementById('val-jemaah').value = inputs.jemaah;
+    } else if (key === 'tahun') {
+        let numericVal = parseInt(value);
+        if (isNaN(numericVal) || numericVal < 2026) numericVal = 2026;
+        if (numericVal > 2060) numericVal = 2060;
+        inputs.tahun = numericVal;
+        document.getElementById('val-tahun').value = inputs.tahun;
+    }
+    
+    updateButtonStates();
+    if (simulationData.length > 0) {
+        runSimulation();
+    }
+}
+
 
 function updateButtonStates() {
     const toggleButton = (id, isDisabled) => {
@@ -101,10 +128,10 @@ async function loadData() {
         const response = await fetch('data.json');
         simulationData = await response.json();
         
-        // Initial setup
-        document.getElementById('val-tabungan').innerText = formatIDR(inputs.tabungan).replace('Rp', '').trim();
-        document.getElementById('val-jemaah').innerText = inputs.jemaah;
-        document.getElementById('val-tahun').innerText = inputs.tahun;
+        // Setup Initial UI
+        document.getElementById('val-tabungan').value = formatIDR(inputs.tabungan).replace('Rp', '').trim();
+        document.getElementById('val-jemaah').value = inputs.jemaah;
+        document.getElementById('val-tahun').value = inputs.tahun;
         
         updateButtonStates();
         runSimulation();
