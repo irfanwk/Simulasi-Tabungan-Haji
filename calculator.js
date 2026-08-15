@@ -146,9 +146,9 @@ function runSimulation() {
         gramEmas += inputs.tabungan / hargaEmas;
         const valuasiEmas = gramEmas * hargaEmas;
         
-        // Push to chart data
-        if (i % 6 === 0) { // store data every 6 months to avoid heavy charting
-            chartLabels.push(year + '-' + t.split('-')[1]);
+        // Push to chart data (Yearly to make X-axis cleaner)
+        if (i % 12 === 0) { 
+            chartLabels.push(year.toString());
             chartRupiah.push(saldoRupiah);
             chartEmas.push(valuasiEmas);
             chartBiaya.push(lunasTarget);
