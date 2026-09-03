@@ -1,7 +1,6 @@
 // State variables
 let inputs = {
     tabungan: 1500000,
-    jemaah: 1,
     tahun: 2026
 };
 let activeTab = 'Reguler';
@@ -24,11 +23,6 @@ function updateInput(key, diff) {
         }
         if (inputs.tabungan < 100000) inputs.tabungan = 100000;
         document.getElementById('val-tabungan').value = formatIDR(inputs.tabungan).replace('Rp', '').trim();
-    } else if (key === 'jemaah') {
-        inputs.jemaah += diff;
-        if (inputs.jemaah < 1) inputs.jemaah = 1;
-        if (inputs.jemaah > 4) inputs.jemaah = 4;
-        document.getElementById('val-jemaah').value = inputs.jemaah;
     } else if (key === 'tahun') {
         inputs.tahun += diff;
         if (inputs.tahun < 2026) inputs.tahun = 2026;
@@ -48,12 +42,6 @@ function handleDirectInput(key, value) {
         if (isNaN(numericVal) || numericVal < 100000) numericVal = 100000;
         inputs.tabungan = numericVal;
         document.getElementById('val-tabungan').value = formatIDR(inputs.tabungan).replace('Rp', '').trim();
-    } else if (key === 'jemaah') {
-        let numericVal = parseInt(value);
-        if (isNaN(numericVal) || numericVal < 1) numericVal = 1;
-        if (numericVal > 4) numericVal = 4;
-        inputs.jemaah = numericVal;
-        document.getElementById('val-jemaah').value = inputs.jemaah;
     } else if (key === 'tahun') {
         let numericVal = parseInt(value);
         if (isNaN(numericVal) || numericVal < 2026) numericVal = 2026;
@@ -81,9 +69,6 @@ function updateButtonStates() {
             btn.disabled = false;
         }
     };
-
-    toggleButton('btn-jemaah-min', inputs.jemaah <= 1);
-    toggleButton('btn-jemaah-plus', inputs.jemaah >= 4);
     
     toggleButton('btn-tabungan-min', inputs.tabungan <= 100000);
     
@@ -135,7 +120,6 @@ async function loadData() {
         
         // Setup Initial UI
         document.getElementById('val-tabungan').value = formatIDR(inputs.tabungan).replace('Rp', '').trim();
-        document.getElementById('val-jemaah').value = inputs.jemaah;
         document.getElementById('val-tahun').value = inputs.tahun;
         
         updateButtonStates();
@@ -155,7 +139,7 @@ function runSimulation() {
     let saldoRupiah = 0;
     let gramEmas = 0;
     
-    const N = inputs.jemaah;
+    const N = 1;
     
     // Milestones tracking
     let milestones = {
@@ -276,7 +260,7 @@ function runSimulation() {
     if (sliceIndex === -1) sliceIndex = chartLabels.length;
 
     // Update Chart
-    document.getElementById('chart-title').innerText = `Proyeksi Tabungan vs Biaya Haji ${activeTab} (${N} Orang)`;
+    document.getElementById('chart-title').innerText = `Proyeksi Tabungan vs Biaya Haji ${activeTab}`;
     if (typeof updateChart === 'function') {
         updateChart(
             chartMode,
