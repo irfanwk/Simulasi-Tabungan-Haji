@@ -183,8 +183,9 @@ function runSimulation() {
         gramEmas += inputs.tabungan / hargaEmas;
         const valuasiEmas = gramEmas * hargaEmas;
         
-        // Push to chart data (Yearly to make X-axis cleaner)
-        if (i % 12 === 0) { 
+        // Push to chart data at the end of each year (total tabungan hingga akhir tahun tersebut)
+        const isEndOfYear = row.Bulan.endsWith('-12-01') || (i === dataSlice.length - 1);
+        if (isEndOfYear) { 
             chartLabels.push(year.toString());
             chartRupiah.push(saldoRupiah);
             chartEmas.push(valuasiEmas);

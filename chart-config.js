@@ -173,6 +173,12 @@ function updateChart(chartMode, labels, dataRupiah, dataEmas, dataBiaya, milesto
                     titleFont: { family: "'Quicksand', sans-serif", size: 14, weight: 'bold' },
                     bodyFont: { family: "'Quicksand', sans-serif", size: 13 },
                     callbacks: {
+                        title: function(context) {
+                            if (context.length > 0) {
+                                return context[0].label + ' (Akhir Tahun)';
+                            }
+                            return '';
+                        },
                         label: function(context) {
                             let label = context.dataset.label || '';
                             if (label) label += ': ';
