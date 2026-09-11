@@ -28,16 +28,49 @@ const milestonePlugin = {
         const metaRupiah = chart.getDatasetMeta(0);
         const metaEmas = chart.getDatasetMeta(1);
         
-        if (!currentMilestones) return;
+        if (!currentMilestones || !currentMilestones[currentChartMode]) return;
         
-        const drawLabel = (meta, type, text) => {
-            if (meta.hidden) return;
-            const milestone = currentMilestones[currentChartMode][type];
-            if (!milestone) return;
-            const yearStr = milestone.year.toString();
+        const meta = currentChartMode === 'Rupiah' ? metaRupiah : metaEmas;
+        if (meta.hidden) return;
+        
+        const m = currentMilestones[currentChartMode];
+        
+        // Group milestones by year to prevent overlapping labels
+        const yearLabels = {};
+        const addMilestone = (milestone, labelText) => {
+            if (!milestone || milestone.year == null) return;
+            const y = milestone.year.toString();
+            if (!yearLabels[y]) yearLabels[y] = [];
+            if (!yearLabels[y].includes(labelText)) {
+                yearLabels[y].push(labelText);
+            }
+        };
+        
+        addMilestone(m.DP, 'DP');
+        addMilestone(m.Pelunasan, 'Lunas');
+        addMilestone(m.Berangkat, 'Berangkat');
+        
+        Object.keys(yearLabels).forEach(yearStr => {
             const index = chart.data.labels.indexOf(yearStr);
             if (index !== -1 && meta.data[index]) {
                 const element = meta.data[index];
+                const labelsArr = yearLabels[yearStr];
+                
+                let text = '';
+                if (labelsArr.includes('Lunas') && labelsArr.includes('Berangkat')) {
+                    if (labelsArr.includes('DP')) {
+                        text = 'DP, Lunas & Berangkat';
+                    } else {
+                        text = 'Lunas & Berangkat';
+                    }
+                } else if (labelsArr.includes('DP') && labelsArr.includes('Lunas')) {
+                    text = 'DP & Lunas';
+                } else if (labelsArr.includes('DP') && labelsArr.includes('Berangkat')) {
+                    text = 'DP & Berangkat';
+                } else {
+                    text = labelsArr.join(', ');
+                }
+                
                 ctx.save();
                 ctx.font = 'bold 11px Quicksand, sans-serif';
                 ctx.fillStyle = colors[currentChartMode.toLowerCase()];
@@ -45,11 +78,7 @@ const milestonePlugin = {
                 ctx.fillText(text, element.x, element.y - 12);
                 ctx.restore();
             }
-        };
-        
-        drawLabel(currentChartMode === 'Rupiah' ? metaRupiah : metaEmas, 'DP', 'DP');
-        drawLabel(currentChartMode === 'Rupiah' ? metaRupiah : metaEmas, 'Pelunasan', 'Lunas');
-        drawLabel(currentChartMode === 'Rupiah' ? metaRupiah : metaEmas, 'Berangkat', 'Berangkat');
+        });
     }
 };
 
