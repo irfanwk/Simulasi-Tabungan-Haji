@@ -1,0 +1,237 @@
+\documentclass[journal,twoside]{IEEEtran}
+\usepackage[utf8]{inputenc}
+\usepackage[indonesian,english]{babel}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{cite}
+\usepackage{url}
+\usepackage{microtype}
+
+\begin{document}
+
+\title{Pemodelan Matematika dan Simulasi Stokastik Dinamika Tabungan Haji: Komparasi Akumulasi Emas Fisik dan Uang Tunai terhadap Inflasi Biaya Jangka Panjang}
+
+\author{
+    \IEEEauthorblockN{Penulis Pertama\IEEEauthorrefmark{1}, Penulis Kedua\IEEEauthorrefmark{1}, Penulis Ketiga\IEEEauthorrefmark{1}}\\
+    \IEEEauthorblockA{\IEEEauthorrefmark{1}Departemen Matematika / Sains / Rekayasa, Afiliasi Perguruan Tinggi, Indonesia\\
+    Email: penulis@institusi.ac.id}
+}
+
+\maketitle
+
+\begin{selectlanguage}{indonesian}
+\begin{abstract}
+Masa tunggu antrean ibadah haji reguler di Indonesia yang mencapai 25 hingga 30 tahun menimbulkan risiko keuangan substansial berupa penurunan daya beli tabungan calon jemaah akibat inflasi biaya operasional dan depresiasi nilai tukar rupiah. Penelitian ini menyajikan formulasi matematika terapan dan simulasi stokastik untuk mengevaluasi efektivitas akumulasi tabungan berbasis emas fisik dibandingkan uang tunai konvensional (Rupiah). Pemodelan dilakukan melalui tiga pilar matematika: (1) peramalan kurs transaksi valuta asing USD/IDR menggunakan Pemulusan Eksponensial Ganda (\textit{Holt's Linear Trend}), (2) permodelan dinamika harga emas Antam berbasis Persamaan Diferensial Stokastik Gerak Brown Geometrik (\textit{Geometric Brownian Motion}, GBM) dengan simulasi Monte Carlo 1.000 lintasan, dan (3) evaluasi pertumbuhan Biaya Penyelenggaraan Ibadah Haji (BPIH) serta Biaya Perjalanan Ibadah Haji (Bipih) menggunakan model eksponensial dan logistik. Kriteria \textit{stopping time} dirumuskan untuk mengukur durasi pencapaian setoran awal nomor porsi ($\tau_{\text{DP}}$), waktu pelunasan ($\tau_{\text{lunas}}$), dan estimasi keberangkatan riil ($\tau_{\text{berangkat}}$). Hasil empiris menunjukkan bahwa laju pertumbuhan tahunan harga emas ($\mu = 11{,}30\%$, $\sigma = 9{,}51\%$) secara signifikan mengimbangi laju inflasi Bipih ($g = 4{,}14\%$). Pada alokasi tabungan Rp1.000.000 per bulan, instrumen emas mempercepat waktu pelunasan hingga 14 bulan lebih awal (4,8 tahun vs. 5,9 tahun) dibandingkan uang tunai, serta memberikan lindung nilai (\textit{hedging}) optimal selama masa tunggu 25 tahun antrean keberangkatan.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Matematika Terapan, Pemodelan Stokastik, Gerak Brown Geometrik, Biaya Haji, Tabungan Emas, Waktu Henti (\textit{Stopping Time}).
+\end{IEEEkeywords}
+\end{selectlanguage}
+
+\begin{selectlanguage}{english}
+\begin{abstract}
+The prolonged waiting list for regular Hajj pilgrimages in Indonesia, ranging between 25 and 30 years, introduces significant financial exposure due to purchasing power erosion caused by operational cost inflation and currency depreciation. This study develops an applied mathematical modeling and stochastic simulation framework to assess the capital accumulation efficacy of physical gold savings relative to conventional fiat currency (IDR). The analytical framework is governed by three mathematical formulations: (1) foreign exchange rate forecasting (USD/IDR) via Holt's Linear Exponential Smoothing, (2) stochastic modeling of gold bullion asset prices via It\^o-type Stochastic Differential Equations under Geometric Brownian Motion (GBM) with 1,000-path Monte Carlo simulations, and (3) non-linear fitting of Hajj Operational Costs (BPIH) and Pilgrim Direct Out-of-Pocket Expenses (Bipih) using exponential and logistic growth functions. Discrete-time stopping criteria are formalized to quantify the time-to-threshold for initial quota registration ($\tau_{\text{DP}}$), total settlement ($\tau_{\text{lunas}}$), and departure realization ($\tau_{\text{berangkat}}$). Empirical findings reveal that gold's annualized drift ($\mu = 11.30\%$, $\sigma = 9.51\%$) reliably outpaces Bipih inflation ($g = 4.14\%$). At a monthly saving allocation of IDR 1,000,000, physical gold achieves settlement 14 months faster (4.8 years vs. 5.9 years) compared to cash, effectively providing purchasing power preservation across the multi-decade queue latency.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Applied Mathematics, Stochastic Modeling, Geometric Brownian Motion, Hajj Cost, Gold Savings, Stopping Time.
+\end{IEEEkeywords}
+\end{selectlanguage}
+
+\section{Pendahuluan}
+Ibadah haji merupakan rukun Islam kelima yang pelaksanaannya diwajibkan bagi individu yang memenuhi kualifikasi kemampuan (\textit{istitha'ah}), baik dari segi kesehatan fisik maupun ketahanan finansial. Di Indonesia, penyelenggaraan ibadah haji menghadapi tantangan disparitas antara kuota nasional tahunan (sekitar 221.000 jemaah) dan akumulasi antrean pendaftar yang melebihi 5 juta jiwa \cite{kemenag2024bpih}. Ketimpangan ini mengakibatkan masa tunggu antrean keberangkatan haji reguler mencapai rentang 25 hingga lebih dari 30 tahun di berbagai wilayah.
+
+Lamanya masa tunggu tersebut menciptakan kerentanan finansial yang serius bagi calon jemaah. Biaya ibadah haji sangat dipengaruhi oleh komponen operasional berbasis valuta asing, seperti biaya penerbangan internasional (aviasi berbasis USD), akomodasi perhotelan, katering, dan layanan Masyair di Arab Saudi (berbasis SAR). Seiring berjalannya waktu, depresiasi nilai tukar Rupiah terhadap mata uang asing serta laju inflasi global mendorong eskalasi Biaya Penyelenggaraan Ibadah Haji (BPIH). Di sisi lain, masyarakat pada umumnya menabung dalam bentuk uang tunai konvensional (rekening perbankan berbasis fiat tanpa imbal hasil tinggi) yang daya belinya tergerus secara eksponensial.
+
+Dalam literatur keuangan dan aktuaria, instrumen emas murni fisik telah lama diakui sebagai aset lindung nilai (\textit{safe-haven asset}) terhadap inflasi dan devaluasi mata uang fiat \cite{hull2003options}. Namun, sebagian besar studi mengenai tabungan haji masih bersifat deskriptif kualitatif atau sebatas simulasi aritmatika statis yang mengabaikan sifat stokastik fluktuasi pasar finansial dan dinamika kebijakan penyesuaian porsi pembiayaan haji nasional.
+
+Penelitian ini bertujuan untuk mengisi kesenjangan tersebut melalui pendekatan matematika terapan yang ketat (\textit{rigorous}). Fokus penelitian ini meliputi:
+\begin{enumerate}
+    \item Memformulasikan model peramalan kurs transaksi USD/IDR menggunakan Pemulusan Eksponensial Ganda (\textit{Holt's Linear Trend}).
+    \item Memodelkan lintasan acak harga emas fisik menggunakan Persamaan Diferensial Stokastik Gerak Brown Geometrik (\textit{Geometric Brownian Motion}, GBM) yang diselesaikan dengan Lema It\^o dan disimulasikan menggunakan metode Monte Carlo.
+    \item Menganalisis kecocokan model pertumbuhan matematis (Eksponensial vs. Logistik) terhadap data historis BPIH dan Bipih periode 2014--2026.
+    \item Memformulasikan sistem akumulasi modal waktu diskrit dan kriteria \textit{stopping time} untuk menghitung probabilitas pencapaian setoran awal porsi dan pelunasan biaya ibadah haji.
+\end{enumerate}
+
+\section{Metodologi dan Landasan Model Matematika}
+
+\subsection{Karakteristik Data Historis}
+Data yang digunakan dalam penelitian ini mencakup tiga variabel utama:
+\begin{enumerate}
+    \item Data historis biaya haji reguler periode 2014--2026 yang bersumber dari Keputusan Presiden (Keppres) tentang Penetapan BPIH dan Keputusan Menteri Agama Republik Indonesia. Variabel ini dipisahkan menjadi BPIH (total beban riil) dan Bipih (porsi setoran tunai jemaah).
+    \item Data historis kurs transaksi jual USD/IDR harian periode 2002--2025 dari Bank Indonesia, yang diagregasikan ke dalam rata-rata bulanan.
+    \item Data historis harga jual dan harga beli kembali (\textit{buyback}) emas batangan PT Antam Tbk periode 2010--2026.
+\end{enumerate}
+
+\subsection{Model Peramalan Kurs USD/IDR: Holt's Linear Trend}
+Kurs valuta asing USD/IDR menunjukkan tren depresiasi jangka panjang tanpa komponen musiman tahunan yang signifikan. Oleh karena itu, diterapkan model Pemulusan Eksponensial Ganda dua parameter dari Holt \cite{holt2004forecasting}.
+
+Model Holt memisahkan deret waktu ke dalam estimasi level ($L_t$) dan tren ($T_t$):
+\begin{align}
+L_t &= \alpha Y_t + (1 - \alpha)(L_{t-1} + T_{t-1}) \label{eq:holt_level} \\
+T_t &= \beta (L_t - L_{t-1}) + (1 - \beta)T_{t-1} \label{eq:holt_trend}
+\end{align}
+dengan $\alpha \in [0,1]$ merupakan parameter pemulusan level, $\beta \in [0,1]$ parameter pemulusan tren, dan $Y_t$ adalah nilai kurs riil pada bulan ke-$t$. Nilai peramalan untuk $h$ periode ke depan dihitung melalui:
+\begin{equation}
+\hat{Y}_{t+h} = L_t + h T_t \label{eq:holt_forecast}
+\end{equation}
+
+\subsection{Model Stokastik Harga Emas: Geometric Brownian Motion (GBM)}
+Harga emas fisik dimodelkan sebagai proses stokastik kontinu yang mengikuti Gerak Brown Geometrik (\textit{Geometric Brownian Motion}, GBM) \cite{hull2003options}. Dinamika harga aset $S_t$ memenuhi Persamaan Diferensial Stokastik (SDE):
+\begin{equation}
+dS_t = \mu S_t dt + \sigma S_t dW_t \label{eq:gbm_sde}
+\end{equation}
+di mana $\mu$ melambangkan laju hanyutan (\textit{drift rate}), $\sigma > 0$ menyatakan koefisien volatilitas, dan $W_t$ adalah proses Wiener standar dengan sifat $W_0 = 0$, $W_t - W_s \sim \mathcal{N}(0, t-s)$.
+
+Menggunakan Lema It\^o pada fungsi transformasi $f(S_t) = \ln S_t$, diperoleh bentuk analitik:
+\begin{equation}
+d(\ln S_t) = \left( \mu - \frac{1}{2}\sigma^2 \right) dt + \sigma dW_t \label{eq:ito_log}
+\end{equation}
+Pengintegralan dari $t$ ke $t + \Delta t$ menghasilkan solusi lintasan diskrit untuk simulasi Monte Carlo:
+\begin{equation}
+S_{t+\Delta t} = S_t \exp\left( \left(\mu - \frac{1}{2}\sigma^2\right)\Delta t + \sigma \sqrt{\Delta t} Z_t \right) \label{eq:gbm_discrete}
+\end{equation}
+dengan $Z_t \sim \mathcal{N}(0, 1)$ adalah variabel acak berdistribusi normal baku independen.
+
+\subsection{Model Pertumbuhan Biaya Haji}
+Dua model pertumbuhan matematika non-linear diuji untuk memproyeksikan laju kenaikan biaya haji:
+
+\subsubsection{Model Eksponensial (CAGR)}
+Mengasumsikan biaya tumbuh secara proporsional terhadap nilainya akibat tekanan inflasi riil tanpa batas jenuh:
+\begin{equation}
+\frac{dP}{dt} = g P \implies P(t) = P_0 e^{g t} \label{eq:exp_model}
+\end{equation}
+di mana $P_0$ adalah biaya pada tahun basis (2014) dan $g$ adalah laju pertumbuhan tahunan.
+
+\subsubsection{Model Logistik}
+Mengasumsikan adanya batas atas kapasitas fiskal masyarakat atau intervensi batas subsidi efisiensi pemerintah ($K$):
+\begin{equation}
+\frac{dP}{dt} = r P \left( 1 - \frac{P}{K} \right) \implies P(t) = \frac{K}{1 + \left( \frac{K - P_0}{P_0} \right) e^{-rt}} \label{eq:log_model}
+\end{equation}
+di mana $K$ adalah \textit{carrying capacity} biaya, $r$ laju pertumbuhan intrinsik, dan $P_0$ nilai awal.
+
+\subsection{Formulasi Akumulasi Modal dan Stopping Time}
+Misalkan calon jemaah menyisihkan dana konstan sebesar $M$ rupiah setiap bulan pada waktu diskrit $k = 1, 2, \dots, N$.
+
+\subsubsection{Akumulasi Uang Tunai (Fiat)}
+Nilai nominal akumulasi uang tunai pada bulan ke-$t$ adalah:
+\begin{equation}
+A_{\text{cash}}(t) = \sum_{k=1}^t M = M \cdot t \label{eq:accum_cash}
+\end{equation}
+
+\subsubsection{Akumulasi Emas Fisik}
+Pada bulan ke-$k$, dana $M$ dikonversikan menjadi emas batangan sebanyak $G_k = \frac{M}{S_k^{\text{buy}}}$, di mana $S_k^{\text{buy}}$ adalah harga jual emas pada bulan $k$. Akumulasi massa emas total hingga bulan ke-$t$ adalah $G(t) = \sum_{k=1}^t G_k$. Nilai likuidasi modal pada bulan ke-$t$ dengan memperhitungkan faktor potongan harga jual kembali (\textit{buyback spread} $\gamma \approx 0{,}90$) adalah:
+\begin{equation}
+A_{\text{gold}}(t) = \gamma \cdot S_t^{\text{buy}} \cdot \sum_{k=1}^t \frac{M}{S_k^{\text{buy}}} \label{eq:accum_gold}
+\end{equation}
+
+\subsubsection{Kriteria Waktu Henti (Stopping Time)}
+Tiga ambang batas waktu didefinisikan secara matematis:
+\begin{enumerate}
+    \item Waktu perolehan setoran awal nomor porsi ($\tau_{\text{DP}}$):
+    \begin{equation}
+    \tau_{\text{DP}} = \min \{ t \in \mathbb{N} \mid A(t) \ge C_{\text{DP}} \}
+    \end{equation}
+    dengan $C_{\text{DP}} = \text{Rp}25.000.000$.
+    \item Waktu pemenuhan biaya pelunasan penuh ($\tau_{\text{lunas}}$):
+    \begin{equation}
+    \tau_{\text{lunas}} = \min \{ t \in \mathbb{N} \mid A(t) \ge C_{\text{pelunasan}}(t) \}
+    \end{equation}
+    \item Waktu keberangkatan riil dengan mempertimbangkan masa tunggu antrean $T_{\text{antrean}} = 25 \text{ tahun} = 300 \text{ bulan}$:
+    \begin{equation}
+    \tau_{\text{berangkat}} = \max\left( \tau_{\text{lunas}}, \, \tau_{\text{DP}} + T_{\text{antrean}} \right)
+    \end{equation}
+\end{enumerate}
+
+\section{Hasil dan Pembahasan}
+
+\subsection{Uji Kecocokan Model Pertumbuhan Biaya Haji}
+Evaluasi kecocokan model dihitung menggunakan koefisien determinasi ($R^2$), \textit{Root Mean Square Error} (RMSE), \textit{Mean Absolute Percentage Error} (MAPE), dan \textit{Akaike Information Criterion} (AIC), sebagaimana disajikan pada Tabel~\ref{tab:model_fit}.
+
+\begin{table}[htbp]
+\caption{Kecocokan Model Pertumbuhan Matematika Biaya Haji (2014--2026)}
+\label{tab:model_fit}
+\centering
+\begin{tabular}{llcccc}
+\toprule
+Variabel & Model & $R^2$ & RMSE (Rp) & MAPE (\%) & AIC \\
+\midrule
+BPIH & Eksponensial & 0,7856 & 6.368.695 & 6,10 & 411,34 \\
+BPIH & Logistik & \textbf{0,8442} & \textbf{5.429.940} & \textbf{6,08} & \textbf{409,19} \\
+\midrule
+Bipih & \textbf{Eksponensial} & \textbf{0,7028} & \textbf{4.419.398} & \textbf{9,21} & \textbf{401,84} \\
+Bipih & Logistik & 0,6897 & 4.515.208 & 9,49 & 404,40 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\columnwidth]{fig1_haji_model_fit.pdf}
+\caption{Kecocokan kurva model pertumbuhan matematika terhadap data historis BPIH dan Bipih periode 2014--2026 serta ekstrapolasi hingga 2035.}
+\label{fig:haji_fit}
+\end{figure}
+
+Berdasarkan Tabel~\ref{tab:model_fit} dan Gambar~\ref{fig:haji_fit}, Model Logistik memberikan nilai kecocokan tertinggi untuk BPIH total ($R^2 = 0{,}8442$, $\text{AIC} = 409{,}19$) dengan titik jenuh estimasi $K \approx \text{Rp}103{,}5$ juta. Namun, untuk Bipih (beban riil yang dibayarkan oleh jemaah), Model Eksponensial terbukti lebih unggul ($R^2 = 0{,}7028$, $\text{AIC} = 401{,}84$) dengan laju inflasi tahunan $g = 4{,}14\%$. Fenomena ini sejalan dengan arah regulasi pemerintah Indonesia yang secara bertahap mengurangi persentase subsidi nilai manfaat BPKH demi keberlanjutan likuiditas dana haji, sehingga beban Bipih jemaah bertumbuh secara eksponensial mendekati biaya operasional riil.
+
+\subsection{Parameter Stokastik Emas dan Kurs Valuta Asing}
+Estimasi parameter deret waktu kurs USD/IDR menghasilkan parameter pemulusan $\alpha = 1{,}0000$ dan $\beta = 0{,}0000$, mengindikasikan bahwa level kurs bergerak mengikuti perilaku \textit{random walk with drift} dengan tren apresiasi linier jangka panjang terhadap rupiah.
+
+Untuk harga emas Antam, perhitungan berbasis log-return bulanan periode 2010--2026 menghasilkan estimasi parameter tahunan:
+\begin{align*}
+\mu_{\text{tahunan}} &= 11{,}30\% \\
+\sigma_{\text{tahunan}} &= 9{,}51\%
+\end{align*}
+Kondisi $\mu > g_{\text{Bipih}}$ ($11{,}30\% > 4{,}14\%$) secara teoritis menjamin bahwa laju pertumbuhan modal berbasis emas memiliki nilai harapan (\textit{expected return}) yang secara konsisten melampaui laju inflasi biaya ibadah haji.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\columnwidth]{fig2_gold_gbm_simulation.pdf}
+\caption{Simulasi stokastik 1.000 lintasan harga emas Antam menggunakan Geometric Brownian Motion (GBM) dan pita interval kepercayaan 90\%.}
+\label{fig:gold_gbm}
+\end{figure}
+
+Gambar~\ref{fig:gold_gbm} mengilustrasikan distribusi lintasan Monte Carlo harga emas selama horison 30 tahun. Meskipun terdapat volatilitas jangka pendek ($\sigma = 9{,}51\%$), drift positif yang kuat memastikan daya beli emas tetap terlindungi dalam jangka menengah dan panjang.
+
+\subsection{Simulasi Stopping Time dan Komparasi Akumulasi}
+Tabel~\ref{tab:sim_results} dan Gambar~\ref{fig:accumulation} memaparkan perbandingan empiris stopping time antara tabungan uang tunai dan emas fisik pada berbagai variasi nominal setoran bulanan.
+
+\begin{table*}[htbp]
+\caption{Hasil Simulasi Waktu Henti (\textit{Stopping Time}) Akumulasi Tabungan Kas vs. Emas (Antrean 25 Tahun)}
+\label{tab:sim_results}
+\centering
+\begin{tabular}{rcccccc}
+\toprule
+Nominal & $\tau_{\text{DP}}$ Kas & $\tau_{\text{DP}}$ Emas (Median) & $\tau_{\text{lunas}}$ Kas & $\tau_{\text{lunas}}$ Emas (Median) & 95\% CI $\tau_{\text{lunas}}$ Emas & Total Waktu Berangkat \\
+\midrule
+Rp1.000.000/bln & 25 bln (2,1 thn) & 25 bln (2,1 thn) & 71 bln (5,9 thn) & \textbf{57 bln (4,8 thn)} & [4,0, 5,8] thn & 27,1 thn \\
+Rp1.500.000/bln & 17 bln (1,4 thn) & 18 bln (1,5 thn) & 43 bln (3,6 thn) & \textbf{39 bln (3,2 thn)} & [2,8, 3,8] thn & 26,4 thn \\
+Rp2.000.000/bln & 13 bln (1,1 thn) & 14 bln (1,2 thn) & 31 bln (2,6 thn) & \textbf{30 bln (2,5 thn)} & [2,2, 2,9] thn & 26,1 thn \\
+Rp3.000.000/bln & 9 bln (0,8 thn) & 9 bln (0,8 thn) & 20 bln (1,7 thn) & \textbf{20 bln (1,7 thn)} & [1,5, 1,9] thn & 25,8 thn \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.98\columnwidth]{fig3_accumulation_comparison.pdf}
+\caption{Dinamika akumulasi modal tabungan uang tunai vs. emas fisik (nominal Rp1.500.000/bulan) terhadap kurva inflasi pelunasan Bipih.}
+\label{fig:accumulation}
+\end{figure}
+
+Temuan analitis menunjukkan pola penting:
+\begin{enumerate}
+    \item \textbf{Fase Setoran Awal ($\tau_{\text{DP}}$):} Pada periode pendek ($\le 2$ tahun), instrumen kas dan emas menghasilkan waktu pencapaian DP porsi yang hampir identik. Hal ini disebabkan oleh adanya potongan harga jual kembali (\textit{buyback spread} $\sim 10\%$) pada emas yang memerlukan waktu amortisasi nilai sekitar 10--12 bulan sebelum keuntungan drift melampaui biaya spread.
+    \item \textbf{Fase Pelunasan ($\tau_{\text{lunas}}$):} Pada horizon menengah (3--6 tahun), instrumen emas menunjukkan keunggulan signifikan. Pada nominal Rp1.000.000/bulan, emas melunasi Bipih pada bulan ke-57 (4,8 tahun), mengungguli uang tunai yang membutuhkan waktu 71 bulan (5,9 tahun). Penghematan waktu sebesar 14 bulan membuktikan efektivitas emas dalam mengimbangi laju $g_{\text{Bipih}}$.
+    \item \textbf{Fase Waktu Tunggu Keberangkatan ($\tau_{\text{berangkat}}$):} Mengingat masa antrean porsi resmi di Indonesia mencapai 25 tahun ($T_{\text{antrean}} = 300$ bulan), jemaah telah menyelesaikan kewajiban pelunasan jauh sebelum giliran keberangkatan tiba ($\tau_{\text{lunas}} < \tau_{\text{DP}} + T_{\text{antrean}}$). Pada kondisi ini, jika sisa dana disimpan dalam instrumen kas, nilai riil tabungan terdepresiasi parah, sementara akumulasi emas terus mengalami pertumbuhan nilai majemuk yang dapat dialokasikan untuk biaya hidup (\textit{living cost}) dan dana darurat saat beribadah.
+\end{enumerate}
+
+\section{Kesimpulan}
+Penelitian ini telah memformulasikan model matematika terapan dan simulasi stokastik untuk mengevaluasi dinamika tabungan ibadah haji reguler di Indonesia. Evaluasi goodness-of-fit menunjukkan bahwa pertumbuhan beban pelunasan riil jemaah (Bipih) paling tepat dimodelkan menggunakan fungsi eksponensial ($R^2 = 0{,}7028$, laju inflasi $g = 4{,}14\%$/tahun). Melalui pemodelan Gerak Brown Geometrik (GBM), harga emas fisik terbukti memiliki parameter pertumbuhan tahunan ($\mu = 11{,}30\%$) yang secara konsisten melampaui laju inflasi haji. Simulasi kriteria stopping time membuktikan bahwa tabungan emas fisik mempercepat waktu pelunasan biaya ibadah haji hingga 14 bulan lebih cepat dibandingkan uang tunai konvensional pada alokasi Rp1.000.000/bulan, serta bertindak sebagai instrumen lindung nilai yang tangguh dalam menghadapi ketidakpastian antrean panjang selama 25 hingga 30 tahun.
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

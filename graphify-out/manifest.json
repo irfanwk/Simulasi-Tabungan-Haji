@@ -1,0 +1,188 @@
+{
+  "calculator.js": {
+    "mtime": 1789138759.7489808,
+    "seen": 1795677310.9993103,
+    "ast_hash": "b353c3e43403f662a16b105ef0c975b5",
+    "semantic_hash": ""
+  },
+  "chart-config.js": {
+    "mtime": 1789163214.1901038,
+    "seen": 1795677310.999317,
+    "ast_hash": "244c26237757f7bafc9164abba434296",
+    "semantic_hash": ""
+  },
+  "data.json": {
+    "mtime": 1786161496.0192723,
+    "seen": 1795677310.99932,
+    "ast_hash": "3435a853cabc17fb9972f733aa309419",
+    "semantic_hash": ""
+  },
+  "package.json": {
+    "mtime": 1786773937.033413,
+    "seen": 1795677310.9993224,
+    "ast_hash": "9eabe75d43af28fdf8f3e50fbd561211",
+    "semantic_hash": ""
+  },
+  "paper/scripts/check_data.py": {
+    "mtime": 1790759093.0742111,
+    "seen": 1795677310.9993243,
+    "ast_hash": "73bce89755bccb3506b58922947190c0",
+    "semantic_hash": ""
+  },
+  "paper/scripts/compare_haji_models.py": {
+    "mtime": 1790759272.1052363,
+    "seen": 1795677310.9993262,
+    "ast_hash": "34b1dace571c2ba3fe9244538e5760fd",
+    "semantic_hash": ""
+  },
+  "paper/scripts/run_experiments.py": {
+    "mtime": 1790759635.3053162,
+    "seen": 1795677310.9993277,
+    "ast_hash": "419f9e81ce6e74d9b5f86ca713372568",
+    "semantic_hash": ""
+  },
+  "research/generate_data.py": {
+    "mtime": 1786161479.4642005,
+    "seen": 1795677310.999329,
+    "ast_hash": "ae32cf2ed6fe271dcec0dfba73c47c92",
+    "semantic_hash": ""
+  },
+  "research/gold/antam_buy.json": {
+    "mtime": 1785559876.7646708,
+    "seen": 1795677310.9993303,
+    "ast_hash": "b93b36225b1776829dd5b158d0550f4c",
+    "semantic_hash": ""
+  },
+  "research/gold/antam_sell.json": {
+    "mtime": 1785559876.7545943,
+    "seen": 1795677310.9993315,
+    "ast_hash": "2f5c3cf2f065e9794e3882dda332650a",
+    "semantic_hash": ""
+  },
+  "research/gold/convert_to_csv.py": {
+    "mtime": 1785560589.0000103,
+    "seen": 1795677310.9993336,
+    "ast_hash": "42f7e1f47f01eebceb324dd46276ce0f",
+    "semantic_hash": ""
+  },
+  "PANDUAN_SLIDE_SIMULASI_DAN_UJI_COBA.md": {
+    "mtime": 1789134355.29714,
+    "seen": 1795677310.9993355,
+    "ast_hash": "5ec6b979c1d6a50fbf43a6439811e374",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1788696327.8711574,
+    "seen": 1795677310.9993367,
+    "ast_hash": "82bd258278c4aa93d0812b4ba84062ba",
+    "semantic_hash": ""
+  },
+  "index.html": {
+    "mtime": 1788441758.544031,
+    "seen": 1795677310.9993384,
+    "ast_hash": "c60a212b2a24ad05be1e5bfe3c96cf26",
+    "semantic_hash": ""
+  },
+  "paper/RESEARCH_NOTES.md": {
+    "mtime": 1790759266.5984688,
+    "seen": 1795677310.9993403,
+    "ast_hash": "45c1eb23435e2dd69a1a211de10cbe44",
+    "semantic_hash": ""
+  },
+  "paper/src/draft_paper.md": {
+    "mtime": 1790759710.910749,
+    "seen": 1795677310.999342,
+    "ast_hash": "f3b9eae305d75d672050f171ff93026e",
+    "semantic_hash": ""
+  },
+  "presentation_slides.html": {
+    "mtime": 1789134321.417085,
+    "seen": 1795677310.999344,
+    "ast_hash": "8eedbfe3ee2bebd1f02f090a36aef92f",
+    "semantic_hash": ""
+  },
+  "01 - Modul Salimah - UPERaisal 2026 -2.pdf": {
+    "mtime": 1789116255.0990634,
+    "seen": 1795677310.9993463,
+    "ast_hash": "e863a012479a37b41567342ab919673e",
+    "semantic_hash": ""
+  },
+  "Presentation.pdf": {
+    "mtime": 1789115679.885581,
+    "seen": 1795677310.9993474,
+    "ast_hash": "6be4604c2cc6748ef099bd8dfa8bc2ae",
+    "semantic_hash": ""
+  },
+  "paper/figures/fig1_haji_model_fit.pdf": {
+    "mtime": 1790759644.389368,
+    "seen": 1795677310.9993484,
+    "ast_hash": "f93116530fc2a8b91abd1243f8fc199e",
+    "semantic_hash": ""
+  },
+  "paper/figures/fig2_gold_gbm_simulation.pdf": {
+    "mtime": 1790759644.7623703,
+    "seen": 1795677310.9993496,
+    "ast_hash": "3e5e1891abd48812a04f934425d0ad2c",
+    "semantic_hash": ""
+  },
+  "paper/figures/fig3_accumulation_comparison.pdf": {
+    "mtime": 1790759645.1113722,
+    "seen": 1795677310.9993508,
+    "ast_hash": "f17333c879a15626bfe93d697d602144",
+    "semantic_hash": ""
+  },
+  "assets/presentation/header-bg-curve.png": {
+    "mtime": 1789119681.3405206,
+    "seen": 1795677310.9993522,
+    "ast_hash": "a9065418382d69d76d05625144df21e6",
+    "semantic_hash": ""
+  },
+  "assets/presentation/qr-simulator.png": {
+    "mtime": 1789119687.0528574,
+    "seen": 1795677310.9993536,
+    "ast_hash": "5d7306972b3715c0db519f878c8ff938",
+    "semantic_hash": ""
+  },
+  "assets/presentation/salimah-logo.png": {
+    "mtime": 1789119681.3278296,
+    "seen": 1795677310.9993546,
+    "ast_hash": "3bc75f1b1337b0b0fd336e21f549154e",
+    "semantic_hash": ""
+  },
+  "assets/presentation/top-right-clean.png": {
+    "mtime": 1789119838.6035976,
+    "seen": 1795677310.9993558,
+    "ast_hash": "01fb05e4f86fd02becc31919a8f43946",
+    "semantic_hash": ""
+  },
+  "assets/presentation/top-right-corner.png": {
+    "mtime": 1789119681.3468356,
+    "seen": 1795677310.999357,
+    "ast_hash": "574e6720c536319a78da70b1c1d6d59f",
+    "semantic_hash": ""
+  },
+  "assets/presentation/top-right-cropped.png": {
+    "mtime": 1789119822.336518,
+    "seen": 1795677310.999358,
+    "ast_hash": "3e8e1b48062deecbef868ea6b9ea2832",
+    "semantic_hash": ""
+  },
+  "assets/presentation/univ-pertamina-logo.png": {
+    "mtime": 1789119681.3338296,
+    "seen": 1795677310.999359,
+    "ast_hash": "fcd42e357467f8693047524ca0bbfb22",
+    "semantic_hash": ""
+  },
+  "research/simulasi_haji_ visual.png": {
+    "mtime": 1785564790.429133,
+    "seen": 1795677310.99936,
+    "ast_hash": "a493fde9af385a4954b979cd432a765a",
+    "semantic_hash": ""
+  },
+  "package-lock.json": {
+    "mtime": 1786773937.0484152,
+    "seen": 1795677310.9993613,
+    "ast_hash": "8ddc8043f78c1cd75dfce4902731e17f",
+    "semantic_hash": ""
+  }
+}

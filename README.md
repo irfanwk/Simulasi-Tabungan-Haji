@@ -1,13 +1,13 @@
 # 🕋 Salimah: Simulator Perencanaan Tabungan Haji (Emas vs Rupiah)
 
-[![GitHub Pages Deployment](https://img.shields.io/badge/Deployment-GitHub%20Pages-brightgreen?style=flat-square&logo=github)](https://irfanwk.github.io/Simulasi-Tabungan-Haji/)
+[![GitHub Pages Deployment](https://img.shields.io/badge/Deployment-GitHub%20Pages-brightgreen?style=flat-square&logo=github)](https://rencanahaji.id/)
 [![Data Modeling](https://img.shields.io/badge/Modeling-Holt--Winters%20%7C%20GBM%20%7C%20Logistic-blue?style=flat-square)](./research/Research.ipynb)
 [![Frontend Stack](https://img.shields.io/badge/Stack-HTML5%20%7C%20TailwindCSS%20%7C%20Chart.js-orange?style=flat-square)](./index.html)
 [![PkM Program](https://img.shields.io/badge/Program-Pengabdian%20Kepada%20Masyarakat%202026-teal?style=flat-square)](#-tim-pelaksana--pengabdian-masyarakat)
 
 Aplikasi kalkulator dan simulator finansial interaktif berbasis *data science* dan *machine learning* untuk membantu calon jemaah haji merencanakan estimasi keberangkatan ke Tanah Suci. Sistem ini membandingkan efektivitas menabung dengan **Uang Tunai (Rupiah)** versus **Emas Batangan (Logam Mulia)** dalam mengimbangi laju inflasi biaya ibadah haji, fluktuasi kurs mata uang asing, dan masa tunggu antrean riil di Indonesia.
 
-🔗 **Akses Langsung Aplikasi:** [https://irfanwk.github.io/Simulasi-Tabungan-Haji/](https://irfanwk.github.io/Simulasi-Tabungan-Haji/)
+🔗 **Akses Langsung Aplikasi:** [https://rencanahaji.id/](https://rencanahaji.id/)
 
 ---
 
